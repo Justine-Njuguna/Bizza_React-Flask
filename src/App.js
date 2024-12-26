@@ -1,21 +1,20 @@
 import React from "react";
-import SpeakerProfile from "./SpeakerProfile";
-import SearchSpeaker from "./SearchSpeaker";
+import useFetchSpeakers from "./useFetchSpeakers";
 
-  //Parent Component
-function App () {
+const App = () => {
+  const API_URL = "https://dummyjson.com/users";
+  const [data] = useFetchSpeakers(API_URL);
   return (
     <>
-      <h1>Speaker profile</h1>
-      <SpeakerProfile
-        name="John Wilson"
-        jobTitle="Frontend Developer"
-        company="Google"
-      />
-
-      <SearchSpeaker />
+      <ul>
+        {data.map((item) => (
+          <li key={item.id}>
+            {item.firstName} {item.lastName}
+          </li>
+        ))}
+      </ul>
     </>
-  )
-}
+  );
+};
 
 export default App;
